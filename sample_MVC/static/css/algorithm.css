@@ -1,0 +1,82 @@
+#algorithm .line{
+  float: left;
+  clear: both;
+  height: 210px;
+  width: 100%;
+  position: relative;
+}
+#algorithm .block{
+  width: 200px;
+  height: 150px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 30px;
+  padding: 10px;
+  float: left;
+  display: table;
+}
+#algorithm .block .text{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  font-weight: bold;
+}
+
+#algorithm .block.selected{
+  border-width: 3px;
+  border-color: #bbb;
+}
+#algorithm .block.connector.end{
+  width: 150px;
+  height: 150px;
+  margin: 30px;
+  border-radius: 75px;
+}
+#algorithm .block.connector{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  margin: 65px 30px;
+}
+
+#algorithm .block.connector.end:first-child{
+  margin: 30px 55px;
+}
+
+#algorithm .block.condition{
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 150px;
+  margin: 30px 55px;
+}
+#algorithm .condition .text{
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#algorithm .arrows{
+  clear: both;
+  margin-top: 30px;
+  float: left;
+  height: 30px;
+  position: relative;
+}
+#algorithm .arrow-down{
+  margin: 10px 120px;
+  position: absolute;
+}
+#algorithm .arrow-next{
+  margin: 92px 0px;
+  float: left;
+  height: 20px;
+}
+
+#algorithm .arrow-next span,
+#algorithm .arrow-down span{
+  font-size: 1.5em;
+}
