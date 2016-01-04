@@ -29,6 +29,8 @@ def showTree(root):
   commands.getoutput('dot -Tps output.dot -o out.ps')
   commands.getoutput('evince out.ps')
 
+
+
 def insert(data, node):
   global parent 
   # print("Coming for something", data)
@@ -48,6 +50,8 @@ def insert(data, node):
     parent = node
     # print ("going for right")
     node.right = insert(data, node.right)
+
+  rebalance(node)
   return node
 
 root = Tree()
