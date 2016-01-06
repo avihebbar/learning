@@ -5,7 +5,11 @@
 
 graph = {
 	'a' : {'b' : 7, 'd' : 14, 'c' : 9 },
-	'b' : {'a' : 7, }
+	'b' : {'a' : 7, 'c' : 10, 'f' : 15},
+	'c' : {'a' : 9, 'b' : 10, 'd' : 2, 'f': 11},
+	'd' : {'a' : 14, 'c' : 2, 'e' : 9},
+	'e' : {'d' : 9, 'f' : 6},
+	'f' : {'b' : 15, 'c': 11, 'e' : 6}
 }
 
 
@@ -28,21 +32,28 @@ def dijkstra(graph, source):
 
 	distance[source] = 0
 
+	distanceQueue =distance.copy()
 	#Edge relaxations
 	while queue:
-		u = min(distance)
-		print "Vertex with minimum distance is : ," u
+		u = min(distanceQueue) 
+		print "Vertex with minimum distance is : ", u
 		queue.remove(u)
-
 		for adjVertex in graph[u]:
 			temp = distance[u] + graph[u][adjVertex]
 			if temp < distance[adjVertex]:
 				"Found better distance for %c as %d rather than %d" %(adjVertex, temp, distance[adjVertex] )
 				distance[adjVertex] = temp
 				parent[adjVertex] = u
-  
-  return distance, parent
+
+		del distanceQueue[u]
+
+	return (distance, parent)
 
 
+(distance, parent) = dijkstra(graph, 'a')
+
+print distance
+
+print parent
 
 
