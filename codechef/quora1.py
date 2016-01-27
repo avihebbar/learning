@@ -3,53 +3,64 @@ K = 3
  
 arr = [1,2,3,1,1]
 
-nonDecreasingCount = 0
-decreasingCount = 0
-
-# -Get first K onto the list
-# - Compute the counts
-# - pop the first one out
-# - append the popped one from the parent list
-# - Compute again
-# - Repeat
+count = {
+	'+' : 0,
+	'-' : 0
+}
 
 window = arr[0:K]
 
 arr = arr[K:N]
 
+diffArray = []
+subSequenceRangeLengths = []
+
 for i in range(0, K-1):
 	if window[i] == window[i+1]:
-		nonDecreasingCount = nonDecreasingCount + 1
-		decreasingCount = decreasingCount + 1
+		diffArray.append('=')
 	elif window[i] > window[i+1]:
-		decreasingCount = decreasingCount + 1
+		diffArray.append('-')
 	else:
-		nonDecreasingCount = nonDecreasingCount + 1
+		diffArray.append('+')
 
+def subRanges(i):
+	retVal = 0
+	for j in range(i, 0 ,-1):
+		retVal = retVal + j
+	return retVal
+
+subSequenceRange = 1
+equalSequenceLength = 0
+
+for i in range( 1, len(diffArray) ):
+	if diffArray[i] == '=':
+		equalSequenceLength = equalSequenceLength + 1
+	elif diffArray[i] != diffArray[ i-1 ]:
+		subSequenceRangeLengths.append( subSequenceRange )
+		count[ diffArray[ i - 1 ] ] = subRanges(subSequenceRange)
+		subSequenceRange = 1
+	subSequenceRange = subSequenceRange + 1
 
 while 1:
-	print nonDecreasingCount -decreasingCount
+	print count['+'] - count['-']
 	if arr:
 		#Ananlyze the effect of removal of first item
-		if window[0] == window[1]:
-			nonDecreasingCount = nonDecreasingCount - 1
-			decreasingCount = decreasingCount - 1
-		elif window[0] < window[1]:
-			nonDecreasingCount = nonDecreasingCount - 1
-		else:
-			decreasingCount = decreasingCount - 1
-		
+		opType = diffArray[0]
+		count[opType] = count[opType] - subSequenceRangeLengths[0]
+		subSequenceRangeLengths[0] = subSequenceRangeLengths[0] - 1
+		if subSequenceRangeLengths[0] == 0:
+			subSequenceRangeLengths.remove( subSequenceRangeLengths[0] )
+
 		window.remove(window[0])
 		window.append(arr[0])
 		arr.remove(arr[0])
 		
+		#For equal ranges it screws :(
 		#Analyze the effect of removal of last item
 		if window[K-2] == window[K-1]:
-			nonDecreasingCount = nonDecreasingCount + 1
-			decreasingCount = decreasingCount + 1
+			subSequenceRangeLengths[-1] = subSequenceRangeLengths[-1] + 1
 		elif window[K-2] < window[K-1]:
-			nonDecreasingCount = nonDecreasingCount + 1
+			subSequenceRangeLengths[-1] = subSequenceRangeLengths[-1] + 1
 		else:
-			decreasingCount = decreasingCount + 1
 	else:
 		break
