@@ -1,5 +1,5 @@
 class node(object):
-  """docstring for node"""
+  """docstring for node test 2"""
   def __init__(self, value):
     super(node, self).__init__()
     self.value = value
